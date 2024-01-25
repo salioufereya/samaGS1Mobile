@@ -116,7 +116,7 @@ class LogiPage extends StatelessWidget {
              alignment: Alignment.bottomCenter,
              height: 40,
              color: Colors.white,
-             margin: const EdgeInsets.only(top: 40,bottom: 15),
+             margin: const EdgeInsets.only(top: 40,bottom: 0),
              child: const Text("BY GS1 SENEGAL",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Color(0xFFF26334))),
            )
           ],

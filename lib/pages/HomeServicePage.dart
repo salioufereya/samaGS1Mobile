@@ -39,7 +39,7 @@ class HomeServicePage extends StatelessWidget {
                       children: [
                         Image(image: AssetImage("images/add.png"),height: 150,),
                         SizedBox(height: 5),
-                        Text("Ajouter un étudiant",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 17),)
+                        Text("Ajouter un étudiant",style: TextStyle(fontWeight: FontWeight.bold,color: Color(0xFF002C6c),fontSize: 17),)
                       ],
                     ),
                   ),
@@ -49,7 +49,7 @@ class HomeServicePage extends StatelessWidget {
                       children: [
                         Image(image: AssetImage("images/consul.png"),height: 150,),
                         SizedBox(height: 5),
-                        Text("Consulter mes données",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 17),)
+                        Text("Consulter mes données",style: TextStyle(fontWeight: FontWeight.bold,color: Color(0xFF002C6c),fontSize: 17),)
                       ],
                     ),
                   ),),
@@ -58,7 +58,7 @@ class HomeServicePage extends StatelessWidget {
                       children: [
                         Image(image: AssetImage("images/verif.png"),height: 150,),
                         SizedBox(height: 5),
-                        Text("Vérifier un diplome",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 17),)
+                        Text("Vérifier un diplome",style: TextStyle(fontWeight: FontWeight.bold,color: Color(0xFF002C6c),fontSize: 17),)
                       ],
                     ),
                   ),),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sama_gs1/pages/ChoiceProfilPage.dart';
 import 'package:sama_gs1/pages/sections/Sections.dart';
 
+import 'ChoicePage.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage ({super.key});
 
@@ -34,7 +36,7 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ChoiceProfilPage()),
+                    MaterialPageRoute(builder: (context) => const ChoicePage()),
                   );
                 },
               ),),

@@ -1,19 +1,53 @@
 import 'package:flutter/material.dart';
 
-
-
-
 logoAndHeader({String? samaText, required String imagePath}) {
-  return Container(
+  return Column(children: [
+Container(
+  color: Colors.white,
+  height: 40,
+),
+    Container(
+        height: 140,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(180),
+              bottomRight: Radius.circular(180),
+
+              ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (samaText != null)
+              Text(
+                samaText,
+                style: TextStyle(
+                  color: Colors.deepOrangeAccent,
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            Image(image: AssetImage(imagePath)),
+          ],
+        ),
+      ),
+
+  ]);
+
+  Container(
     height: 180,
+    color: Colors.white,
     width: double.infinity,
-    decoration: BoxDecoration(
+    /* decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: const BorderRadius.only(
         bottomLeft: Radius.circular(200),
         bottomRight: Radius.circular(200),
       ),
     ),
+    */
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -32,28 +66,25 @@ logoAndHeader({String? samaText, required String imagePath}) {
   );
 }
 
-
-
-
 Widget titre({required String titre}) {
   return Container(
     padding: EdgeInsets.all(15),
     child: Text(
       '$titre',
-      style: TextStyle(color: Colors.white, fontSize: 20,fontWeight: FontWeight.bold),
+      style: TextStyle(
+          color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
     ),
   );
 }
 
-
-Container header({required String imagePath}){
-  return   Container(
+Container header({required String imagePath}) {
+  return Container(
     height: 105,
     color: Colors.white,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-         Padding(
+        Padding(
             padding: EdgeInsets.only(top: 25, left: 25),
             child: Column(
               children: [
@@ -67,14 +98,28 @@ Container header({required String imagePath}){
                 )
               ],
             )),
-        Padding(padding: const EdgeInsets.only(right: 10,top: 25),
+        Padding(
+          padding: const EdgeInsets.only(right: 10, top: 25),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("Log out",style: TextStyle(color: Color(0xFF002C6c),fontSize: 20,fontWeight: FontWeight.bold),),
-              IconButton(onPressed: (){}, icon: const Icon(Icons.logout_outlined,size: 32,color: Color(0xFFF26334),))
+              const Text(
+                "Log out",
+                style: TextStyle(
+                    color: Color(0xFF002C6c),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.logout_outlined,
+                    size: 32,
+                    color: Color(0xFFF26334),
+                  ))
             ],
-          ),)
+          ),
+        )
       ],
     ),
   );
