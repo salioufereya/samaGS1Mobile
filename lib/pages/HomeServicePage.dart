@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sama_gs1/pages/sections/Sections.dart';
 
-class HomeServicePage extends StatelessWidget {
+import '../providers/Auth.dart';
+
+class HomeServicePage extends StatefulWidget {
   const HomeServicePage({super.key});
 
   @override
+  State<HomeServicePage> createState() => _HomeServicePageState();
+}
+
+class _HomeServicePageState extends State<HomeServicePage> {
+
+  @override
   Widget build(BuildContext context) {
+    Auth auth = Provider.of<Auth>(context);
     return Scaffold(
       body: Column(
         children: [
-          header(imagePath: "images/ucad.png"),
+          header(imagePath:(auth.user!.ecole!.logo!),context: context),
           Container(
             color: Color(0xFF002C6c),
             height: 50,

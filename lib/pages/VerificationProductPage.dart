@@ -17,13 +17,11 @@ class _VerificationProductPageState extends State<VerificationProductPage> {
     super.initState();
     _controller = TextEditingController();
   }
-
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +36,10 @@ class _VerificationProductPageState extends State<VerificationProductPage> {
           children: [
             ElevatedButton(
                 onPressed: scanBarcodeNormal,
-                child:  Column(
+                child:  const Column(
                   children: [
                     Icon(Icons.camera_alt_rounded),
-                    const Text("Scanner le code à barre"),
+                    Text("Scanner le code à barre"),
                   ],
                 )),
             Padding(
@@ -52,7 +50,7 @@ class _VerificationProductPageState extends State<VerificationProductPage> {
                   valeur = value;
                 },
                 obscureText: false,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   hintText: "Saisir le code à barre",
@@ -65,10 +63,10 @@ class _VerificationProductPageState extends State<VerificationProductPage> {
             ),
             Text("Resultat code bar :${valeur}",style: TextStyle(fontSize: 18,color: Colors.white,fontWeight: FontWeight.bold)),
             Padding(
-              padding: EdgeInsets.only(left: 10,right: 10,top: 10),
+              padding: const EdgeInsets.only(left: 10,right: 10,top: 10),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:Color(0xFFF26334),
+                  backgroundColor:const Color(0xFFF26334),
                   textStyle: const TextStyle(fontSize: 20),
                   padding: const EdgeInsets.fromLTRB(25, 10, 25, 15),
                   shape: const RoundedRectangleBorder(
@@ -77,7 +75,7 @@ class _VerificationProductPageState extends State<VerificationProductPage> {
                 ),
                 child: const Text('Vérifier',style: TextStyle(color: Colors.white)),
                 onPressed: ()  {
-                 String url = 'https://www.gs1.org/services/verified-by-gs1/results?gtin=60460000010803';
+                 String url = 'https://www.gs1.org/services/verified-by-gs1/results?gtin=${_controller.text}';
                  print(_controller.text);
                   _launchURL(url);
                 },
@@ -109,7 +107,6 @@ class _VerificationProductPageState extends State<VerificationProductPage> {
   }
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
-
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
       throw "Cannot launch URL";
     }

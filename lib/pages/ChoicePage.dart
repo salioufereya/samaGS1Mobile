@@ -37,7 +37,7 @@ class ChoicePage extends StatelessWidget {
               Text("Verification des produits", style: TextStyle(color: Colors.white, fontSize: 18))
             ],
           ),
-          const Padding(padding: EdgeInsets.only(top: 50)),
+
           Expanded(child:
           Container(
             alignment: Alignment.center,

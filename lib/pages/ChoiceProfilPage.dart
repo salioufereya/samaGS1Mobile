@@ -10,13 +10,14 @@ class ChoiceProfilPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF002C6c),
  body:
+
  Column(
    children: [
      logoAndHeader(imagePath: "images/GS1_Senegal.png"),
 titre(titre: "Veillez choisir votre profil"),
       Column(
        children: [
-        Padding(padding: EdgeInsets.only(top: 0),child:   InkWell(child:Image(image: AssetImage("images/choix1.png"),height: 200),onTap: () {
+        Padding(padding: EdgeInsets.only(top: 0),child:   InkWell(child:Image(image: AssetImage("images/choix1.png"),height: 180),onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const LogiPage()),
@@ -27,11 +28,10 @@ titre(titre: "Veillez choisir votre profil"),
      ),
      const Column(
        children: [
-         Padding(padding: EdgeInsets.only(top: 0),child: Image(image: AssetImage("images/choix2.png"),height: 200)),
+         Padding(padding: EdgeInsets.only(top: 0),child: Image(image: AssetImage("images/choix2.png"),height: 180)),
          Text("Une agence intérim", style: TextStyle(color: Colors.white, fontSize: 18))
        ],
      ),
-     const Padding(padding: EdgeInsets.only(top: 15)),
      Expanded(child:
      Container(
        alignment: Alignment.center,
