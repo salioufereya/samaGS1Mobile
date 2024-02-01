@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sama_gs1/pages/HomeServicePage.dart';
 import 'package:sama_gs1/pages/sections/Sections.dart';
+import 'package:sama_gs1/utils/validate.dart';
 import '../providers/Auth.dart';
 
 class LogiPage extends StatefulWidget {
@@ -15,6 +16,8 @@ class LogiPage extends StatefulWidget {
 class _LogiPageState extends State<LogiPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  bool isEmailValid = false;
+  bool isPasswordValid=false;
   final _formkey = GlobalKey<FormState>();
 
   @override
@@ -55,7 +58,8 @@ class _LogiPageState extends State<LogiPage> {
                   width: MediaQuery.of(context).size.width / 1.2,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white),
+                      color: Colors.white,
+                  ),
                   child: Form(
                     key: _formkey,
                     child: Column(
@@ -63,29 +67,52 @@ class _LogiPageState extends State<LogiPage> {
                       children: [
                         const Padding(
                           padding: EdgeInsets.only(left: 10, top: 10),
-                          child: Text("Nom d'utilisateur",
+                          child: Text("Email",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
                                   color: Color(0xFF002C6c))),
                         ),
-                        Padding(
-                          padding:
-                              EdgeInsets.only(left: 10, right: 10, top: 10),
-                          child: TextFormField(
-                            obscureText: false,
-                            controller: _emailController,
-                            validator: (value) => value!.isEmpty
-                                ? "Please enter valid email"
-                                : null,
-                            decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 15.0, horizontal: 10.0),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(40.0))),
-                          ),
-                        ),
-                        const Padding(
+                            Padding(
+                                  padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                                  child: TextFormField(
+                                        obscureText: false,
+                                        onChanged: (value) {
+                                              setState(() {
+                                                    isEmailValid = validateEmailAdress(value);
+                                              });
+                                        },
+                                        controller: _emailController,
+                                        validator: (value) {
+                                              if (value!.isEmpty) {
+                                                    return "L'adresse mail est obligatoire";
+                                              } else if (!isEmailValid) {
+                                                    return "Entrer un email valide";
+                                              }
+                                              return null; // Retourne null s'il n'y a pas d'erreur de validation
+                                        },
+                                        decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                                              enabledBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(40.0),
+                                                    borderSide: BorderSide(color: Colors.black87),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(40.0),
+                                                    borderSide: BorderSide(color: isEmailValid ? Colors.green : Colors.red),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(40.0),
+                                                    borderSide: BorderSide(color: Colors.red),
+                                              ),
+                                              focusedErrorBorder: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(40.0),
+                                                    borderSide: BorderSide(color: Colors.red),
+                                              ),
+                                        ),
+                                  ),
+                            ),
+                            const Padding(
                           padding: EdgeInsets.only(left: 10, top: 10),
                           child: Text("Mot de passe",
                               style: TextStyle(
@@ -94,21 +121,45 @@ class _LogiPageState extends State<LogiPage> {
                                   color: Color(0xFF002C6c))),
                         ),
                         Padding(
-                          padding:
-                              EdgeInsets.only(left: 10, right: 10, top: 10),
+                          padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                           child: TextFormField(
                             obscureText: true,
+                            onChanged: (value) {
+                              setState(() {
+                                isPasswordValid = validatePassword(value);
+                              });
+                            },
                             controller: _passwordController,
-                            validator: (value) => value!.isEmpty
-                                ? "Saisir le mot de passe"
-                                : null,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Le mot de passe est obligatoire";
+                              } else if (!validatePassword(value)) {
+                                return "Minimum 5 caractères dont un caractère spécial";
+                              }
+                              return null;
+                            },
                             decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 15.0, horizontal: 10.0),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(40.0))),
+                              contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(40.0),
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(40.0),
+                                borderSide: BorderSide(color: isPasswordValid ? Colors.green : Colors.red),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(40.0),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(40.0),
+                                borderSide: BorderSide(color: Colors.red),
+                              ),
+                            ),
                           ),
                         ),
+
                         const Padding(
                           padding: EdgeInsets.only(left: 10, top: 15),
                           child: Text("Mot de passe oublié ?",
@@ -137,13 +188,8 @@ class _LogiPageState extends State<LogiPage> {
                                 'password': _passwordController.text
                               };
                               if (_formkey.currentState!.validate()) {
-                               authProvider.login(creds:creds,context: context);
-                              }else{
-                                Flushbar(
-                                  title: 'Invalid form',
-                                  message: 'Veillez renseigner tous les champs',
-                                  duration: Duration(seconds: 5),
-                                ).show(context);
+                                authProvider.login(
+                                    creds: creds, context: context);
                               }
                             },
                           ),

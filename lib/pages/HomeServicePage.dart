@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sama_gs1/pages/AddStudent.dart';
 import 'package:sama_gs1/pages/sections/Sections.dart';
 
 import '../providers/Auth.dart';
@@ -20,23 +21,10 @@ class _HomeServicePageState extends State<HomeServicePage> {
       body: Column(
         children: [
           header(imagePath:(auth.user!.ecole!.logo!),context: context),
-          Container(
-            color: Color(0xFF002C6c),
-            height: 50,
-            child: Row(
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(left: 15, right: 15),
-                    child: Icon(Icons.computer_outlined, color: Colors.white)),
-                Text(
-                  "LES SERVICES",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.white),
-                )
-              ],
-            ),
+          SectionTitre(
+            backgroundColor: Color(0xFF002C6c),
+            title: "LES SERVICES",
+            icon: Icons.computer_outlined,
           ),
           Expanded(
               child: Container(
@@ -45,12 +33,20 @@ class _HomeServicePageState extends State<HomeServicePage> {
               child: Column(
                 children: [
                   Padding(padding: EdgeInsets.only(top: 15),child: Center(
-                    child: Column(
-                      children: [
-                        Image(image: AssetImage("images/add.png"),height: 150,),
-                        SizedBox(height: 5),
-                        Text("Ajouter un étudiant",style: TextStyle(fontWeight: FontWeight.bold,color: Color(0xFF002C6c),fontSize: 17),)
-                      ],
+                    child: InkWell(
+                      child: Column(
+                        children: [
+                          Image(image: AssetImage("images/add.png"),height: 150,),
+                          SizedBox(height: 5),
+                          Text("Ajouter un étudiant",style: TextStyle(fontWeight: FontWeight.bold,color: Color(0xFF002C6c),fontSize: 17),)
+                        ],
+                      ),
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const AddStudent()),
+                        );
+                      },
                     ),
                   ),
                   ),

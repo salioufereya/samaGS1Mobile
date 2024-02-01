@@ -36,9 +36,18 @@ String? _token;
           );
         } else {
           Flushbar(
-            title: 'Bad credentials',
+            title: 'OOPS!!!',
             message: errorMessage,
             duration: Duration(seconds: 5),
+            flushbarPosition: FlushbarPosition.TOP,
+            backgroundColor: Colors.red,
+            icon: Icon(Icons.error, color: Colors.white),
+            margin: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(16.0),
+            boxShadows: [BoxShadow(color: Colors.black, blurRadius: 4.0)],
+            dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+            forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+            reverseAnimationCurve: Curves.fastOutSlowIn,
           ).show(context);
           _isLoggedIn = false;
         }
@@ -52,13 +61,15 @@ String? _token;
 
 
   void logout({required BuildContext context}) {
-    _isLoggedIn = false;
-    Navigator.push(
+    cleanUp();
+    Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const LogiPage()),
+      MaterialPageRoute(builder: (context) => LogiPage()),
+          (route) => false,
     );
     notifyListeners();
   }
+
   void tryToken({required String? token}) async{
     if(token==null){
       return ;
@@ -89,6 +100,12 @@ String? _token;
     } else {
       throw Exception('Aucun utilisateur trouvé.');
     }
+  }
+  void cleanUp() async {
+    this._user = null;
+    this._isLoggedIn = false;
+    this._token = null;
+    await storage.delete(key: 'token');
   }
 
 }

@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sama_gs1/pages/GestionProfileEcole.dart';
 
 import '../../providers/Auth.dart';
 
@@ -87,9 +88,7 @@ base64ToImage(String base64String) {
   return Image.memory(Uint8List.fromList(bytes));
 }
 
-Container header(
-    {required String imagePath,
-    required BuildContext context}) {
+Container header({required String imagePath, required BuildContext context}) {
   return Container(
     height: 100,
     color: Colors.white,
@@ -100,10 +99,19 @@ Container header(
             padding: EdgeInsets.only(top: 25, left: 25),
             child: Column(
               children: [
-                Container(
-                  width: 80,  // Définissez la largeur souhaitée
-                  height: 70, // Définissez la hauteur souhaitée
-                  child: base64ToImage(imagePath),
+                InkWell(
+                  child: Container(
+                    width: 80, // Définissez la largeur souhaitée
+                    height: 70, // Définissez la hauteur souhaitée
+                    child: base64ToImage(imagePath),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GestionProfilEcole()),
+                    );
+                  },
                 ),
               ],
             )),
@@ -124,15 +132,24 @@ Container header(
                         context: context,
                         builder: (BuildContext context) => AlertDialog(
                           title: const Text('Warning'),
-                          content: const Text('Voulez vraiment se déconnecter ?',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15)),
+                          content: const Text(
+                              'Voulez vraiment se déconnecter ?',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15)),
                           actions: <Widget>[
                             TextButton(
                               onPressed: () => Navigator.pop(context, 'Cancel'),
-                              child: const Text('Annuler',style: TextStyle(color: Colors.red,fontSize: 18)),
+                              child: const Text('Annuler',
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 18)),
                             ),
                             TextButton(
-                              onPressed: () => Provider.of<Auth>(context,listen: false).logout(context: context),
-                              child: const Text('Oui',style: TextStyle(color: Colors.green,fontSize: 18)),
+                              onPressed: () =>
+                                  Provider.of<Auth>(context, listen: false)
+                                      .logout(context: context),
+                              child: const Text('Oui',
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 18)),
                             ),
                           ],
                         ),
@@ -143,6 +160,33 @@ Container header(
                     color: Color(0xFFF26334),
                   ))
             ],
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+Widget SectionTitre({
+  required Color backgroundColor,
+  required String title,
+  required IconData icon,
+}) {
+  return Container(
+    color: backgroundColor,
+    height: 50,
+    child: Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 15, right: 15),
+          child: Icon(icon, color: Colors.white),
+        ),
+        Text(
+          title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Colors.white,
           ),
         )
       ],

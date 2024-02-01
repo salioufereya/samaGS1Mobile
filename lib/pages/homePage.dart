@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
           Expanded(child: Stack(
             alignment: Alignment.center,
             children: [
-              const Image(image: AssetImage("images/aman.png")),
+              const Image(image: AssetImage("images/aman1.png")),
               Positioned(
                 bottom: 100,
                 child:
