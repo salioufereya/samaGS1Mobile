@@ -193,3 +193,84 @@ Widget SectionTitre({
     ),
   );
 }
+
+
+
+Container headerText({required BuildContext context}) {
+  return Container(
+    height: 100,
+    color: Colors.white,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+            padding: EdgeInsets.only(top: 25, left: 25),
+            child: Column(
+              children: [
+                InkWell(
+                  child: Container(
+                    width: 80, // Définissez la largeur souhaitée
+                    height: 70, // Définissez la hauteur souhaitée
+                    child:Image(image: AssetImage("images/ucad.png")),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GestionProfilEcole()),
+                    );
+                  },
+                ),
+              ],
+            )),
+        Padding(
+          padding: const EdgeInsets.only(right: 10, top: 25),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Log out",
+                style: TextStyle(
+                    color: Color(0xFF002C6c),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                  onPressed: () => showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text('Warning'),
+                      content: const Text(
+                          'Voulez vraiment se déconnecter ?',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15)),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                          child: const Text('Annuler',
+                              style: TextStyle(
+                                  color: Colors.red, fontSize: 18)),
+                        ),
+                        TextButton(
+                          onPressed: () =>
+                              Provider.of<Auth>(context, listen: false)
+                                  .logout(context: context),
+                          child: const Text('Oui',
+                              style: TextStyle(
+                                  color: Colors.green, fontSize: 18)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  icon: const Icon(
+                    Icons.logout_outlined,
+                    size: 32,
+                    color: Color(0xFFF26334),
+                  ))
+            ],
+          ),
+        )
+      ],
+    ),
+  );
+}

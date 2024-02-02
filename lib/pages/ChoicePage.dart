@@ -37,15 +37,14 @@ class ChoicePage extends StatelessWidget {
               Text("Verification des produits", style: TextStyle(color: Colors.white, fontSize: 18))
             ],
           ),
-
-          Expanded(child:
-          Container(
-            alignment: Alignment.center,
-            color: Colors.white,
-            child: const Text("BY GS1 SENEGAL",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Color(0xFFF26334))),
-          )
-          )],
+          ],
       ),
+        bottomNavigationBar: Container(
+          height: 35,
+          alignment: Alignment.center,
+          color:  Colors.white,
+          child: Text("BY GS1 SENEGAL",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Color(0xFFF26334))),
+        )
     );
   }
 }

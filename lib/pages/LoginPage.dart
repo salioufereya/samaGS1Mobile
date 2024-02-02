@@ -19,18 +19,15 @@ class _LogiPageState extends State<LogiPage> {
   bool isEmailValid = false;
   bool isPasswordValid=false;
   final _formkey = GlobalKey<FormState>();
-
   @override
   void initState() {
     super.initState();
   }
-
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     Auth authProvider = Provider.of<Auth>(context);
@@ -159,7 +156,6 @@ class _LogiPageState extends State<LogiPage> {
                             ),
                           ),
                         ),
-
                         const Padding(
                           padding: EdgeInsets.only(left: 10, top: 15),
                           child: Text("Mot de passe oublié ?",
@@ -222,20 +218,16 @@ class _LogiPageState extends State<LogiPage> {
                 ),
               ),
             ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              height: 40,
-              color: Colors.white,
-              margin: const EdgeInsets.only(top: 40, bottom: 0),
-              child: const Text("BY GS1 SENEGAL",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFF26334))),
-            )
           ],
         );
-      })),
+      }),
+      ),
+        bottomNavigationBar: Container(
+          height: 35,
+          alignment: Alignment.center,
+          color:  Colors.white,
+          child: Text("BY GS1 SENEGAL",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Color(0xFFF26334))),
+        )
     );
   }
 }

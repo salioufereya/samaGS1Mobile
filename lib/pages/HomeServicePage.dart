@@ -16,11 +16,11 @@ class _HomeServicePageState extends State<HomeServicePage> {
 
   @override
   Widget build(BuildContext context) {
-    Auth auth = Provider.of<Auth>(context);
+   Auth auth = Provider.of<Auth>(context);
     return Scaffold(
       body: Column(
         children: [
-          header(imagePath:(auth.user!.ecole!.logo!),context: context),
+         header(imagePath:(auth.user!.ecole!.logo!),context: context),
           SectionTitre(
             backgroundColor: Color(0xFF002C6c),
             title: "LES SERVICES",
@@ -68,18 +68,19 @@ class _HomeServicePageState extends State<HomeServicePage> {
                       ],
                     ),
                   ),),
-                      Container(
-                        alignment: Alignment.center,
-                        color: Color(0xFF002C6c),
-                        height: 35,
-                        width: MediaQuery.of(context).size.width,
-                        child: Text("BY GS1 SENEGAL",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold)),
-                      )
+
                 ],
               ),
             ),
           ))
         ],
+      ),
+      bottomNavigationBar:  Container(
+        alignment: Alignment.center,
+        color: Color(0xFF002C6c),
+        height: 35,
+        width: MediaQuery.of(context).size.width,
+        child: Text("BY GS1 SENEGAL",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold)),
       ),
     );
   }

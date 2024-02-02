@@ -78,6 +78,7 @@ class _VerificationProductPageState extends State<VerificationProductPage> {
                  String url = 'https://www.gs1.org/services/verified-by-gs1/results?gtin=${_controller.text}';
                  print(_controller.text);
                   _launchURL(url);
+                 _controller.clear();
                 },
               ),
             ),

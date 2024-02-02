@@ -25,7 +25,10 @@ class _AddStudentState extends State<AddStudent> {
   bool isEmailValid = false;
   bool isPasswordValid = false;
   final _formkey = GlobalKey<FormState>();
-
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   void dispose() {
     _nom.dispose();
@@ -48,7 +51,8 @@ class _AddStudentState extends State<AddStudent> {
         key: _formkey,
         child: Column(
           children: [
-            header(imagePath: (auth.user!.ecole!.logo!), context: context),
+          //  header(imagePath: (auth.user!.ecole!.logo!), context: context),
+            headerText(context: context),
             SectionTitre(
               backgroundColor: Color(0xFF002C6c),
               title: "AJOUT D'ETUDIANT",
@@ -287,6 +291,13 @@ class _AddStudentState extends State<AddStudent> {
           ],
         ),
       ),
-    ));
+    ),
+        bottomNavigationBar: Container(
+          height: 35,
+          alignment: Alignment.center,
+          color:  Color(0xFF002C6c),
+          child: Text("BY GS1 SENEGAL",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white)),
+        )
+    );
   }
 }
